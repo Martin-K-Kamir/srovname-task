@@ -13,16 +13,4 @@ export const {
             clientSecret: process.env.GOOGLE_AUTH_SECRET,
         }),
     ],
-    callbacks: {
-        authorized({ auth }) {
-            return !!auth?.user;
-        },
-        redirect({ url, baseUrl }) {
-            if (url.includes("/auth/login")) return baseUrl;
-            return url;
-        },
-    },
-    pages: {
-        signIn: "/",
-    },
 });
