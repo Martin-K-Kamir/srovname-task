@@ -12,7 +12,7 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useUsersStore } from "./hooks";
+import { useUsersStore } from "@/features/users/hooks";
 
 const formSchema = z.object({
     name: z.string().min(2).max(50),
