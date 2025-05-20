@@ -246,15 +246,15 @@ export function ListPaginationPrevPageButton({
 
 export function ListPaginationCounter({
     className,
-    forceRender = false,
+    forceDisplay = false,
     ...props
 }: React.ComponentProps<"p"> & {
-    forceRender?: boolean;
+    forceDisplay?: boolean;
 }) {
     const { currentIndex, limit, length } = useListPagination();
     const totalChunks = Math.ceil(length / limit);
 
-    if (length <= limit && !forceRender) {
+    if (length <= limit && !forceDisplay) {
         return null;
     }
 
@@ -267,23 +267,37 @@ export function ListPaginationCounter({
 
 export function ListPaginationButtons({
     className,
-    forceRender = false,
+    forceDisplay = false,
     ...props
-}: Omit<React.ComponentProps<"div">, "children"> & {
-    forceRender?: boolean;
+}: Omit<React.ComponentProps<"nav">, "children"> & {
+    forceDisplay?: boolean;
 }) {
     const { length, limit } = useListPagination();
 
-    if (length <= limit && !forceRender) {
+    if (length <= limit && !forceDisplay) {
         return null;
     }
 
     return (
-        <div className={cn("flex items-center gap-2", className)} {...props}>
-            <ListPaginationFirstPageButton />
-            <ListPaginationPrevPageButton />
-            <ListPaginationNextPageButton />
-            <ListPaginationLastPageButton />
-        </div>
+        <nav
+            aria-label="Pagination Navigation"
+            className={cn(className)}
+            {...props}
+        >
+            <ul className="flex items-center gap-2">
+                <li>
+                    <ListPaginationFirstPageButton />
+                </li>
+                <li>
+                    <ListPaginationPrevPageButton />
+                </li>
+                <li>
+                    <ListPaginationNextPageButton />
+                </li>
+                <li>
+                    <ListPaginationLastPageButton />
+                </li>
+            </ul>
+        </nav>
     );
 }
